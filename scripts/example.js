@@ -2,9 +2,10 @@
 let name = prompt('Enter your full name', '');
 let age;
 
-while ( !( !isNaN(age) && age > 0) ) {
+while ( isNaN(age) || age <= 0 ) {
     age = prompt('How old are you?', '18');
 }
+
 
 let sex = confirm('Are you a man?');
 let famStatus = prompt('Indicate your family status', '');
