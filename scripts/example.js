@@ -1,35 +1,43 @@
 'use strict'
-let name = prompt('Enter your full name', '');
+let name;
+do {
+    name = prompt('Enter your full name', '').trim();
+} while ( !name );
+
 let age;
-
-while ( isNaN(age) || age <= 0 ) {
+do {
     age = prompt('How old are you?', '18');
-}
+} while ( isNaN(age) || age <= 0 );
 
+let gender = confirm('Are you a man?');
 
-let sex = confirm('Are you a man?');
-let famStatus = prompt('Indicate your family status', '');
+let famStatus; 
+do {
+    famStatus = prompt('Indicate your family status', '').trim();
+} while ( !famStatus );
 
-let footSize = prompt('Enter your foot size', '42');
-let address = prompt('Enter your address?', '');
+let footSize;
+do {
+    footSize  = prompt('Enter your foot size', '42');
+} while ( isNaN(footSize) || footSize <= 0);
 
-console.log(age);
+let address; 
+do {
+    address = prompt('Enter your address', '').trim();
+} while ( !address );
 
-let maturity;
-if (age >= 18) {
-    maturity = 'Of age';
-} else {
-    maturity = 'Underage';
-}
+const maturity = (age >= 18) ? 'Of age' : 'Uderage';
 
+const Gender = gender ? 'Male' : 'Female';
 
-if (sex === true) {
-    sex = 'Male';
-} else {
-    sex = 'Female';
-}
-
-alert(`Name : ${name}\nAge : ${age}\nSex : ${sex}\nFamily Status : ${famStatus}\nFoot Size : ${footSize}\nAddress : ${address}\nMaturity : ${maturity}`);
+alert(
+    `Name : ${name}
+    Age : ${age}
+    Gender : ${Gender}
+    Family Status : ${famStatus}
+    Foot Size : ${footSize}
+    Address : ${address}
+    Maturity : ${maturity}`);
 
 
 
