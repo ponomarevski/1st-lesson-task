@@ -3,7 +3,6 @@
 let age;
 /*
 alert(
-    
     `Name : ${check('Enter your full name')}
     Age : ${age = validate('How old are you?', '18')}
     Gender : ${confirm('Are you a man?') ? 'Male' : 'Female'}
