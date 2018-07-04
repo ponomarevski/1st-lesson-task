@@ -1,7 +1,7 @@
 'use strict'
 
 let age;
-/*
+
 alert(
     `Name : ${check('Enter your full name')}
     Age : ${age = validate('How old are you?', '18')}
@@ -10,7 +10,6 @@ alert(
     Foot Size : ${validate ('Enter your foot size', '40')}
     Address : ${check('Enter your address')}
     Maturity : ${age >= 18 ? 'Of age' : 'Uderage'}`);
-    */
 
 
 function check (message) {
