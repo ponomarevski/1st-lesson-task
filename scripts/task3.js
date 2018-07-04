@@ -15,6 +15,9 @@ function calculate (a, b, c) {
     } else if (d === 0) {
        let x = -b / (2 * a);
         alert ('x равен:' + x);
+    } else if (a === 0) {
+        let x3 = -c / b;
+        alert ('x3 равен:' + x3); 
     } else {
         alert ('Корней уравнения не найдено');
     }
