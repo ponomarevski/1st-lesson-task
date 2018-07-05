@@ -1,35 +1,34 @@
 'use strict'
 
 let age;
-/*
+
 alert(
     
-    `Name : ${check('Enter your full name')}
-    Age : ${age = validate('How old are you?', '18')}
+    `   Name : ${validate('Enter your full name', '', checkSrting)}
+    Age : ${age = validate('How old are you?', '18', checkNumber )}
     Gender : ${confirm('Are you a man?') ? 'Male' : 'Female'}
-    Family Status : ${check('Indicate your family status')}
-    Foot Size : ${validate ('Enter your foot size', '40')}
-    Address : ${check('Enter your address')}
+    Family Status : ${validate('Indicate your family status', '', checkSrting)}
+    Foot Size : ${validate ('Enter your foot size', '40', checkNumber)}
+    Address : ${validate('Enter your address', '', checkSrting)}
     Maturity : ${age >= 18 ? 'Of age' : 'Uderage'}`);
-    */
 
 
-function check (message) {
-    let value;
-    do {
-        value = prompt(message, '').trim();
-    } while ( !value );
-    return value;
-}
-
-function validate (message, defaultValue) {
+function validate (message, defaultValue, additionalCheck = () => true) {
     let value;
     do {
         value = prompt(message, defaultValue);
-    } while ( isNaN(value) || value <= 0 );
+    } while ( !value || !additionalCheck(value) );
     return value;
 }
 
 
+function checkNumber (value) {
+    return !isNaN(value) && value > 0;
+}
 
+function checkSrting(value) {
+    value = value.trim();
+    let isString = value ? true : false;
+    return isString;
+}
 
