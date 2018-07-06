@@ -27,8 +27,6 @@ function checkNumber (value) {
 }
 
 function checkSrting(value) {
-    value = value.trim();
-    let isString = value ? true : false;
-    return isString;
+       return !!value.trim();
 }
 
