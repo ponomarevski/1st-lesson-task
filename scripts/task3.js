@@ -4,11 +4,11 @@ let a = prompt ('Введите a', '');
 let b = prompt ('Введите b', '');
 let c = prompt ('Введите c', '');
 
-calculate(a, b, c);
+calculate( parseInt(a), parseInt(b), parseInt(c) );
 
 function calculate (a, b, c) {
     let d = b * b - 4 * a * c;
-    if (a == 0) {
+    if (a === 0) {
         let x = -c / b;
         alert ('x равен:' + x);
     } else if (d > 0) {
