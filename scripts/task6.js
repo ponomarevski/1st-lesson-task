@@ -15,6 +15,7 @@ arrText.forEach( word => {
 
 let newArr = [];
 
+/*
 let wordsLength = Object.keys(words).length;
 
 for(let i = 0; i < wordsLength; i++) {
@@ -33,6 +34,13 @@ for(let i = 0; i < wordsLength; i++) {
     newArr.push(key);
     delete words[key];
 }
+*/
+
+let entries = Object.entries(words);
+Object.entries(words).sort( (first, second) => {
+    return second [1] - first [1];
+}).map(entry => entry[0]);
+ 
 
 console.log(newArr);
 

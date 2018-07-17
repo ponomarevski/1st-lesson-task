@@ -12,6 +12,7 @@ let resultMatrix = [];
 for (let i = 0; i < matrix1.length; i++) {
 
     let row = [];
+    
 
     for (let j = 0; j < matrix2[0].length ; j++){
 
@@ -21,10 +22,14 @@ for (let i = 0; i < matrix1.length; i++) {
 
             column.push(matrix2[k][j]);
         }
-
-console.log(multiply (matrix1[i], column) );        
+        
+        row.push(multiply(matrix1[i], column));
+        
 
     }
+
+    resultMatrix.push(row);
+
 }
 
 
@@ -37,3 +42,5 @@ function multiply (row, column) {
 
     return sum;
 } 
+
+console.log(resultMatrix);
