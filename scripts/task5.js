@@ -2,7 +2,10 @@
 
 let transmissions = ['manual', 'automatic'];
 let fuelTypes = ['gasoline', 'diesel'];
-let carBodies = {J: 'Jeep', U: 'Universal'};
+let carBodies = {
+    J: 'Jeep', 
+    U: 'Universal'
+};
 
 let cars = [{age: 21, transmission: 1, model: 'BMW', modelSpec: '640', mileage: 77666, fuelType: 1, carBody: 'J'},
             {age: 30, transmission: 2, model: 'VW', modelSpec: '337', mileage: 69894, fuelType: 2, carBody: 'U'}
