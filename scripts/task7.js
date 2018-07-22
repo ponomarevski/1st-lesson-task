@@ -13,7 +13,6 @@ for (let i = 0; i < matrix1.length; i++) {
 
     let row = [];
     
-
     for (let j = 0; j < matrix2[0].length ; j++){
 
         let column = [];
@@ -25,13 +24,11 @@ for (let i = 0; i < matrix1.length; i++) {
         
         row.push(multiply(matrix1[i], column));
         
-
     }
 
     resultMatrix.push(row);
 
 }
-
 
 function multiply (row, column) {
     let sum = 0;
