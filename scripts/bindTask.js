@@ -15,7 +15,7 @@ let bind = function(fn, context) {
     };
 };
 
-let bindedSum = bind(sum, {cont:10, t : 80}, 20, 30);
+let bindedSum = bind(sum, {cont:10}, 20, 30);
 console.log(bindedSum(40, 50, 60));
 
 
