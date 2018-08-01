@@ -52,3 +52,27 @@ function PC(displayDiagonal, ram, weight) {
     }
 };
 let pc = new PC(21, 8, 5);
+
+function Server(displayDiagonal, ram, weight, memoryCapacity) {
+    PC.apply(this, arguments);
+    
+    this.memoryCapacity = memoryCapacity;
+    
+    this.showState = function () {
+        if (this.isTurnOn) {
+            console.log('Server is working');
+        } else {
+            console.log('Server is disabled');
+        }
+    }
+    
+    let parentGetInfo = this.getInfo;
+    this.getInfo = function () {
+        let parentInfo = parentGetInfo.call(this);
+        return `${parentInfo}
+        Memory Capacity: ${this.memoryCapacity}`
+    }
+ };  
+ let server = new Server(0, 20, 100, 50);   
+    
+    
