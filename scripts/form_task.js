@@ -56,30 +56,16 @@ function input(formElements) {
 
     switch (formElements[i].kind) {
       case "longtext":
-        element = doc.createElement("input");
-        element.type = "text";
-        element.className = formElements[i].kind;
+        element = createText(formElements[i], 255);
         break;
       case "number":
-        element = doc.createElement("input");
-        element.type = "number";
+        element = createNumber();
         break;
       case "shorttext":
-        element = doc.createElement("input");
-        element.type = "text";
-        element.maxLength = 50;
-        element.className = formElements[i].kind;
+        element = createText(formElements[i], 50);
         break;
       case "memo":
-        element = doc.createElement("textarea");
-        element.cols = 70;
-        element.rows = 3;
-
-        label.parentElement.appendChild(doc.createElement('br'));
-        label.parentElement.appendChild(element);
-        label.parentElement.setAttribute('colspan', '2');
-
-        element = undefined;
+        createMemo(label.parentElement);
         break;
       case "combo":
         element = select(formElements[i].variants);
@@ -88,15 +74,10 @@ function input(formElements) {
         radio(formElements[i].variants, tr);
         break;
       case "check":
-        element = doc.createElement("input");
-        element.type = "checkbox";
+        element = createCheck();
         break;
       case "submit":
-        label.parentElement.remove();
-
-        element = doc.createElement("input");
-        element.type = "submit";
-        element.value = formElements[i].label;
+        element = createSubmit(formElements[i], label);
         break;
 
     }
@@ -105,8 +86,7 @@ function input(formElements) {
       let td = doc.createElement('td');
 
       element.id = formElements[i].name;
-      // form.appendChild(element);
-
+      
       td.appendChild(element);
       tr.appendChild(td);
     }
@@ -117,6 +97,51 @@ function input(formElements) {
 }
 input(formDef1);
 input(formDef2);
+
+function createText(formElement, maxLength) {
+  let element = doc.createElement("input");
+  element.type = "text";
+  element.className = formElement.kind;
+  element.maxLength = maxLength;
+
+  return element;
+};
+
+function createNumber() {
+  let element = doc.createElement("input");
+  element.type = "number";
+
+  return element;
+};
+
+function createMemo(labelContainer) {
+  let element = doc.createElement("textarea");
+  element.cols = 70;
+  element.rows = 3;
+
+  labelContainer.appendChild(doc.createElement('br'));
+  labelContainer.appendChild(element);
+  labelContainer.setAttribute('colspan', '2');
+
+  return element;
+};
+
+function createCheck() {
+  let element = doc.createElement("input");
+  element.type = "checkbox";
+
+  return element;
+};
+
+function createSubmit(formElement, label) {
+  label.parentElement.remove();
+
+  let element = doc.createElement("input");
+  element.type = "submit";
+  element.value = formElement.label;
+
+  return element;
+};
 
 function select(variants) {
 
