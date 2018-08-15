@@ -34,6 +34,7 @@ let doc = document;
 function input(formElements) {
 
   let form = doc.createElement("form");
+  form.onsubmit = validateForm;
   let table = doc.createElement('table');
 
   for (let i = 0; i < formElements.length; i++) {
@@ -82,11 +83,33 @@ function input(formElements) {
 
     }
 
+    switch (formElements[i].name) {
+      case "secondname":
+      case "firstname":
+      case "lastname":
+        element.oninput = validateText.bind(element);
+        break;
+      case "visitors":
+      case "age":
+        element.oninput = validateNumber.bind(element);
+        break;
+      case "sitename":
+        element.oninput = validateSiteName.bind(element);
+        break;
+      case "siteurl":
+        element.oninput = validateSiteUrl.bind(element);
+        break;
+      case "email":
+        element.oninput = validateEmail.bind(element);
+        break;
+    }
+
     if (element) {
+      element.required = true;
       let td = doc.createElement('td');
 
       element.id = formElements[i].name;
-      
+
       td.appendChild(element);
       tr.appendChild(td);
     }
@@ -103,6 +126,7 @@ function createText(formElement, maxLength) {
   element.type = "text";
   element.className = formElement.kind;
   element.maxLength = maxLength;
+  element.onke
 
   return element;
 };
@@ -122,6 +146,8 @@ function createMemo(labelContainer) {
   labelContainer.appendChild(doc.createElement('br'));
   labelContainer.appendChild(element);
   labelContainer.setAttribute('colspan', '2');
+
+  element.required = true;
 
   return element;
 };
@@ -167,10 +193,103 @@ function radio(variants, tr) {
     radioButton.value = variant.value;
     radioButton.name = variant.name;
     radioButton.type = "radio";
+    radioButton.required = true;
     let textNode = doc.createTextNode(variant.text);
     td.appendChild(radioButton);
     td.appendChild(textNode);
   });
   tr.appendChild(td);
+};
+
+function validateText(event) {
+
+  while (this.parentElement.childNodes.length !== 1) {
+    this.parentElement.removeChild(this.parentElement.lastChild);
+  }
+
+  let errorText;
+  if (!this.value) {
+    errorText = doc.createTextNode('Введите текст');
+  } else if (!/^[a-zA-Zа-яА-Я]+$/.test(this.value)) {
+    errorText = doc.createTextNode('Неверные данные');
+  }
+
+  if (errorText) {
+    this.parentElement.appendChild(errorText);
+  };
+};
+
+function validateNumber(event) {
+
+  while (this.parentElement.childNodes.length !== 1) {
+    this.parentElement.removeChild(this.parentElement.lastChild);
+  }
+
+  let errorText;
+  if (!this.value) {
+    errorText = doc.createTextNode('Введите число');
+  } else if (!/^[0-9]+$/.test(this.value)) {
+    errorText = doc.createTextNode('Неверные данные');
+  }
+
+  if (errorText) {
+    this.parentElement.appendChild(errorText);
+  };
+};
+
+function validateSiteName(event) {
+
+  while (this.parentElement.childNodes.length !== 1) {
+    this.parentElement.removeChild(this.parentElement.lastChild);
+  }
+
+  let errorText;
+  if (!this.value) {
+    errorText = doc.createTextNode('Введите название сайта');
+  } else if (!/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(this.value)) {
+    errorText = doc.createTextNode('Неверные данные');
+  }
+
+  if (errorText) {
+    this.parentElement.appendChild(errorText);
+  };
+};
+
+function validateSiteUrl(event) {
+  while (this.parentElement.childNodes.length !== 1) {
+    this.parentElement.removeChild(this.parentElement.lastChild);
+  }
+
+  let errorText;
+  if (!this.value) {
+    errorText = doc.createTextNode('Введите url сайта');
+  } else if (!/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/.test(this.value)) {
+    errorText = doc.createTextNode('Неверные данные');
+  }
+
+  if (errorText) {
+    this.parentElement.appendChild(errorText);
+  };
+};
+
+function validateEmail(event) {
+  while (this.parentElement.childNodes.length !== 1) {
+    this.parentElement.removeChild(this.parentElement.lastChild);
+  }
+
+  let errorText;
+  if (!this.value) {
+    errorText = doc.createTextNode('Введите email');
+  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.value)) {
+    errorText = doc.createTextNode('Неверные данные');
+  }
+
+  if (errorText) {
+    this.parentElement.appendChild(errorText);
+  };
 }
 
+function validateForm(e) {
+  console.log(e);
+
+}
